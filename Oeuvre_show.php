@@ -1,16 +1,7 @@
 <?php
-include("connexion_bdd.php");
-// traitement
-if(isset($_POST)  )  // si il existe certaines variables dans le tableau associatif $_POST
-{                    // le formulaire vient d'être soumis
-
-}
-
-// affichage de la vue
+	include("connexion_bdd.php");
+	$requete =  "SELECT AUTEUR.nomAuteur,OEUVRE.titre,OEUVRE.dateParution FROM OEUVRE
+				 INNER JOIN AUTEUR ON OEUVRE.idAuteur = AUTEUR.idAuteur
+				 ORDER BY OEUVRE.titre;"
+	// auteur titre date parution nbr nbrDispo operations
 ?>
-<?php include("v_head.php");  ?>
-<?php include ("v_nav.php");  ?>
-
-<!-- affichage(vue) relatif à la page -->
-
-<?php include ("v_foot.php");  ?>
