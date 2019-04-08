@@ -12,5 +12,9 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 <?php include ("v_nav.php");  ?>
 
 <!-- affichage(vue) relatif à la page -->
+<form action="POST">
+    <label>Nom de l'auteur: </label><input type="text" name="nom"><br>
+    <label for="prenom">Prenom de l'auteur: </label> <input type="text" name="prenom"><br>
+</form>
 
 <?php include ("v_foot.php");  ?>
