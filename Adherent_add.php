@@ -15,8 +15,7 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 
 include('connexion.php');
 
-if(isset($_POST["form_insert_Adherent_Valider"]) AND isset($_POST["nomAdherent"])  AND isset($_POST["adresse"] AND isset($_POST["datePaiement"]))
-    {
+if(isset($_POST["form_insert_Adherent_Valider"]) AND isset($_POST["nomAdherent"])  AND isset($_POST["adresse"]) AND isset($_POST["datePaiement"])){
 
     $nomAdherent=$_POST["nomAdherent"];
     $adresse=$_POST["adresse"];
