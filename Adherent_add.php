@@ -13,7 +13,7 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 
 <?php
 
-include('connexion.php');
+
 
 if(isset($_POST["form_insert_Adherent_Valider"]) AND isset($_POST["nomAdherent"])  AND isset($_POST["adresse"]) AND isset($_POST["datePaiement"])){
 
@@ -23,9 +23,9 @@ if(isset($_POST["form_insert_Adherent_Valider"]) AND isset($_POST["nomAdherent"]
 
 
 
-    $chaine_SQL="INSERT INTO Etudiant (Nom_ETU,Ville_ETU) VALUES ('".$nomAdherent."','".$adresse."','".$datePaiement."');";
+    $chaine_SQL="INSERT INTO ADHERENT (idAdherent,nomAdherent,adresse,datePaiement) VALUES ( NULL,'".$nomAdherent."','".$adresse."','".$datePaiement."');";
         print "executer avec PDO :".$chaine_SQL."<br>";
-    $nbrInsert= $ma_connexion_mysql->query($chaine_SQL);
+    $nbrInsert= $bdd->query($chaine_SQL);
     // header("Location: Etudiant_show_result.php");
     }
 ?>
