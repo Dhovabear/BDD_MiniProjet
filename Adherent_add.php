@@ -24,7 +24,7 @@ if(isset($_POST["form_insert_Adherent_Valider"]) AND isset($_POST["nomAdherent"]
 
 
     $chaine_SQL="INSERT INTO ADHERENT (idAdherent,nomAdherent,adresse,datePaiement) VALUES ( NULL,'".$nomAdherent."','".$adresse."','".$datePaiement."');";
-        print "executer avec PDO :".$chaine_SQL."<br>";
+        
     $nbrInsert= $bdd->query($chaine_SQL);
     // header("Location: Etudiant_show_result.php");
     }
