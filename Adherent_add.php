@@ -24,7 +24,7 @@ if(isset($_POST["form_insert_Adherent_Valider"]) AND isset($_POST["nomAdherent"]
 
 
     $chaine_SQL="INSERT INTO ADHERENT (idAdherent,nomAdherent,adresse,datePaiement) VALUES ( NULL,'".$nomAdherent."','".$adresse."','".$datePaiement."');";
-        
+
     $nbrInsert= $bdd->query($chaine_SQL);
     // header("Location: Etudiant_show_result.php");
     }
@@ -38,5 +38,7 @@ if(isset($_POST["form_insert_Adherent_Valider"]) AND isset($_POST["nomAdherent"]
       <input type="submit" name="form_insert_Adherent_Valider" value="Valider" />
     </fieldset>
   </form>
+  <a href="Adherent_show.php">Retour</a>
 </div>
+
 <?php include ("v_foot.php");  ?>

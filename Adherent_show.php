@@ -12,7 +12,31 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 <?php include ("v_nav.php");  ?>
 <div class="row">
   <a href="Adherent_add.php"> Ajouter</a>
-</div>
-<!-- affichage(vue) relatif à la page -->
 
+
+  <?php
+    if(isset($_GET["suprimer"])){
+      $supr=$_GET["suprimer"];
+      $chaine_SQL2="DELETE FROM ADHERENT WHERE id='.$supr.';";
+      $suprRes=
+    }
+    $chaine_SQL="SELECT * FROM ADHERENT;";
+
+
+    $reponse= $bdd->query($chaine_SQL);
+    $donnee = $reponse->fetchAll();
+    // header("Location: Etudiant_show_result.php");
+  ?>
+
+  <table border="1">
+    <th>id</th><th>nom</th><th>adresse</th><th>date paiment</th>
+    <?php foreach($donnee as $row): ?>
+        <?php
+            echo "<tr><td>".$row['idAdherent']."</td><td>".$row['nomAdherent'].
+            "</td><td>".$row['adresse']."</td><td>".$row['datePaiement'].
+            "</td><td><a href='Adherent_show.php?suprimer=".$row['idAdherent'].
+            "'>Suprimer</a>";?>
+    <?php endforeach;?>
+  </table>
+</div>
 <?php include ("v_foot.php");  ?>
