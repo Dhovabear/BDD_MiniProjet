@@ -3,9 +3,11 @@ include("connexion_bdd.php");
 // traitement
 if(isset($_POST)  )  // si il existe certaines variables dans le tableau associatif $_POST
 {                    // le formulaire vient d'être soumis
-    $commande = "SELECT * FROM AUTEUR;";
-    $auteurs = $bdd->query($commande)->fetchAll();
+
 }
+
+$commande = "SELECT * FROM AUTEUR;";
+$auteurs = $bdd->query($commande)->fetchAll();
 
 // affichage de la vue
 ?>
