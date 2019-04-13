@@ -4,6 +4,7 @@ include("connexion_bdd.php");
 
 $smthgWasDel = false;
 $smthgWasAdd = false;
+$smthgWasEdit = false;
 
 if (isset($_GET)){
     if(isset($_GET["delSuc"])){
@@ -12,13 +13,14 @@ if (isset($_GET)){
     if(isset($_GET["addSuc"])){
         $smthgWasAdd = true;
     }
+
+    if(isset($_GET["editSuc"])){
+        $smthgWasEdit = true;
+    }
 }
 
 if(isset($_POST)  )  // si il existe certaines variables dans le tableau associatif $_POST
 {                    // le formulaire vient d'être soumis
-    if(isset($_POST["delSuc"])){
-
-    }
 }
 
 $commande = "SELECT * FROM AUTEUR;";
@@ -47,6 +49,14 @@ $auteurs = $bdd->query($commande)->fetchAll();
         <?php endif; ?>
     <?php endif; ?>
 
+    <?php if($smthgWasEdit): ?>
+        <?php if($_GET["editSuc"]): ?>
+            <div class="titreMenu" style="color: green">Modifications enregistrées !</div>
+        <?php else: ?>
+            <div class="titreMenu" style="color: red">Echec lors de l'enregistrement des modifications</div>
+        <?php endif; ?>
+    <?php endif; ?>
+
     <a href="Auteur_add.php">Ajouter un auteur</a>
     <?php if(isset($auteurs[0])): ?>
         <table border="2">
@@ -59,7 +69,10 @@ $auteurs = $bdd->query($commande)->fetchAll();
                     <tr>
                         <td><?php echo($ligne["nomAuteur"]); ?></td>
                         <td><?php echo($ligne["prenomAuteur"]); ?></td>
-                        <td><a href="Auteur_delete.php?idToDel=<?php echo($ligne["idAuteur"]) ?>">Supprimer</a></td>
+                        <td>
+                            <a href="Auteur_delete.php?idToDel=<?php echo($ligne["idAuteur"]) ?>">Supprimer</a>
+                            <a href="Auteur_edit.php?idToEdit=<?php echo($ligne["idAuteur"]) ?>">Modifier</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
