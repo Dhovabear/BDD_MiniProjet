@@ -1,9 +1,20 @@
 <?php
 include("connexion_bdd.php");
 // traitement
+
+$smthgWasDel = false;
+
+if (isset($_GET)){
+    if(isset($_GET["delSuc"])){
+        $smthgWasDel = true;
+    }
+}
+
 if(isset($_POST)  )  // si il existe certaines variables dans le tableau associatif $_POST
 {                    // le formulaire vient d'être soumis
+    if(isset($_POST["delSuc"])){
 
+    }
 }
 
 $commande = "SELECT * FROM AUTEUR;";
@@ -15,6 +26,15 @@ $auteurs = $bdd->query($commande)->fetchAll();
 <?php include ("v_nav.php");  ?>
 
 <div class="row">
+    <div class="titreMenu"> Liste des auteurs enregistrés</div>
+    <?php if($smthgWasDel): ?>
+        <?php if($_GET["delSuc"]): ?>
+            <div class="titreMenu" style="color: green">Suppression réussie !</div>
+        <?php else: ?>
+            <div class="titreMenu" style="color: red">Echec lors de la suppression</div>
+        <?php endif; ?>
+    <?php endif; ?>
+
     <a href="Auteur_add.php">Ajouter un auteur</a>
     <?php if(isset($auteurs[0])): ?>
         <table border="2">
@@ -27,7 +47,7 @@ $auteurs = $bdd->query($commande)->fetchAll();
                     <tr>
                         <td><?php echo($ligne["nomAuteur"]); ?></td>
                         <td><?php echo($ligne["prenomAuteur"]); ?></td>
-                        <td><a href="Auteur_delete.php">Supprimer</a></td>
+                        <td><a href="Auteur_delete.php?idToDel=<?php echo($ligne["idAuteur"]) ?>">Supprimer</a></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
