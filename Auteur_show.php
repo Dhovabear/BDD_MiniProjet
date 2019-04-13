@@ -3,10 +3,14 @@ include("connexion_bdd.php");
 // traitement
 
 $smthgWasDel = false;
+$smthgWasAdd = false;
 
 if (isset($_GET)){
     if(isset($_GET["delSuc"])){
         $smthgWasDel = true;
+    }
+    if(isset($_GET["addSuc"])){
+        $smthgWasAdd = true;
     }
 }
 
@@ -32,6 +36,14 @@ $auteurs = $bdd->query($commande)->fetchAll();
             <div class="titreMenu" style="color: green">Suppression réussie !</div>
         <?php else: ?>
             <div class="titreMenu" style="color: red">Echec lors de la suppression</div>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if($smthgWasAdd): ?>
+        <?php if($_GET["addSuc"]): ?>
+            <div class="titreMenu" style="color: green">Ajout réussie !</div>
+        <?php else: ?>
+            <div class="titreMenu" style="color: red">Echec lors de l'ajout</div>
         <?php endif; ?>
     <?php endif; ?>
 

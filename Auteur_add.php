@@ -2,14 +2,13 @@
 include("connexion_bdd.php");
 
 
-$champsok = false;
 // traitement
 if(isset($_POST) && isset($_POST["nom"]) && isset($_POST["prenom"]))  // si il existe certaines variables dans le tableau associatif $_POST
 {                // le formulaire vient d'être soumis
-    $champsok = true;
     $commande = "INSERT INTO AUTEUR (idAuteur,nomAuteur,prenomAuteur)
                  VALUES (NULL,'".$_POST["nom"]."','".$_POST["prenom"]."');";
     $res = $bdd->exec($commande);
+    header("Location: Auteur_show.php?addSuc=".$res);
 }
 
 // affichage de la vue
@@ -19,6 +18,7 @@ if(isset($_POST) && isset($_POST["nom"]) && isset($_POST["prenom"]))  // si il e
 
 <!-- affichage(vue) relatif à la page -->
 <div class="row">
+    <a href="Auteur_show.php">Retour</a>
     <form action="Auteur_add.php" method="post">
         <fieldset>
             <legend>Ajout d'un auteur</legend>
@@ -27,16 +27,7 @@ if(isset($_POST) && isset($_POST["nom"]) && isset($_POST["prenom"]))  // si il e
             <input type="submit">
         </fieldset>
     </form>
-    <?php if($champsok): ?>
-        <?php if($res == 1): ?>
-            <p style="color: green">Auteur <?php echo($_POST["nom"])?> <?php echo($_POST["prenom"])?> ajouté avec succès! </p>
-        <?php else: ?>
-            <p style="color: red">
-                Erreur lors de l'ajout de l'auteur <?php echo($_POST["nom"])?> <?php echo($_POST["prenom"])?>
-                , veuillez réessayer ultérieurement
-            </p>
-        <?php endif; ?>
-    <?php endif; ?>
+
 </div>
 
 <?php include ("v_foot.php");  ?>
