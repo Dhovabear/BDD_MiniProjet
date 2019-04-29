@@ -24,7 +24,7 @@ if(isset($_POST) && isset($_POST["nom"]) && isset($_POST["prenom"]))  // si il e
             <legend>Ajout d'un auteur</legend>
             <label for="nom">Nom de l'auteur: </label><input type="text" name="nom" required><br>
             <label for="prenom">Prenom de l'auteur: </label> <input type="text" name="prenom" required><br>
-            <input type="submit">
+            <input type="submit" value="Valider">
         </fieldset>
     </form>
 
