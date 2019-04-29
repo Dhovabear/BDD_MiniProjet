@@ -55,7 +55,7 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
             </div>
             <form action="Adherent_show.php"><input type="submit" value="Annuler"></form>
             <form action="Adherent_delete.php" method="post">
-                    <input type="hidden" value="<?php echo($auteur["idAdherent"]); ?>" name="deleteIdAD">
+                    <input type="hidden" value="<?php echo($adherent["idAdherent"]); ?>" name="deleteIdAD">
                     <input type="submit" value="Continuer">
 
             </form>
