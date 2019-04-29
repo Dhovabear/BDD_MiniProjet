@@ -8,7 +8,7 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 
 // affichage de la vue
 ?>
-<?php include("v_head.php");  ?>
+<?php include ("v_head.php");  ?>
 <?php include ("v_nav.php");  ?>
 <div class="row">
   <a href="Adherent_add.php"> Ajouter</a>
@@ -17,8 +17,8 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
   <?php
     if(isset($_GET["suprimer"])){
       $supr=$_GET["suprimer"];
-      $chaine_SQL2="DELETE FROM ADHERENT WHERE id='.$supr.';";
-      $suprRes=
+      $chaine_SQL2="DELETE FROM ADHERENT WHERE id=".$supr.";";
+      $suprRes=exec($chaine_SQL2);
     }
     $chaine_SQL="SELECT * FROM ADHERENT;";
 
