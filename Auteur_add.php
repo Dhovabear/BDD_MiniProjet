@@ -1,14 +1,26 @@
 <?php
 include("connexion_bdd.php");
 
+$erreurPrenom = false;
+$erreurNom = false;
 
 // traitement
 if(isset($_POST) && isset($_POST["nom"]) && isset($_POST["prenom"]))  // si il existe certaines variables dans le tableau associatif $_POST
 {                // le formulaire vient d'être soumis
-    $commande = "INSERT INTO AUTEUR (idAuteur,nomAuteur,prenomAuteur)
+
+    if(strlen($_POST["nom"]) < 2){
+        $erreurNom = true;
+    }
+
+
+
+
+    if(!$erreurNom){
+        $commande = "INSERT INTO AUTEUR (idAuteur,nomAuteur,prenomAuteur)
                  VALUES (NULL,'".$_POST["nom"]."','".$_POST["prenom"]."');";
-    $res = $bdd->exec($commande);
-    header("Location: Auteur_show.php?addSuc=".$res);
+        $res = $bdd->exec($commande);
+        header("Location: Auteur_show.php?addSuc=".$res);
+    }
 }
 
 // affichage de la vue
@@ -22,8 +34,11 @@ if(isset($_POST) && isset($_POST["nom"]) && isset($_POST["prenom"]))  // si il e
     <form action="Auteur_add.php" method="post">
         <fieldset>
             <legend>Ajout d'un auteur</legend>
-            <label for="nom">Nom de l'auteur: </label><input type="text" name="nom" ><br>
-            <label for="prenom">Prenom de l'auteur: </label> <input type="text" name="prenom" ><br>
+            <label for="nom">Nom de l'auteur: </label><input type="text" name="nom" >
+            <?php if($erreurNom): ?> <div style="color: red">Erreur le nom contient minimum 2 caractères</div><?php endif; ?>
+            <br>
+            <label for="prenom">Prenom de l'auteur: </label> <input type="text" name="prenom" >
+            <br>
             <input type="submit" value="Valider">
         </fieldset>
     </form>

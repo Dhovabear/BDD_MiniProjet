@@ -1,23 +1,36 @@
 <?php
 include("connexion_bdd.php");
 // traitement
+$erreurNom = false;
 
-if(isset($_GET)){
-    if(isset($_GET["idToEdit"])){
-        $commande = "SELECT * FROM AUTEUR WHERE AUTEUR.idAuteur = ".$_GET["idToEdit"].";";
-        $auteur = $bdd->query($commande)->fetch();
-    }
-}
+
 
 if(isset($_POST)  )  // si il existe certaines variables dans le tableau associatif $_POST
 {              // le formulaire vient d'être soumis
 
     if(isset($_POST["nom"])&& isset($_POST["prenom"]) && isset($_POST["idAuteur"])){
-        $commande = "UPDATE AUTEUR SET AUTEUR.nomAuteur = '".$_POST["nom"]."',
+
+        $_GET["idToEdit"] = $_POST["idAuteur"];
+
+        if(strlen($_POST["nom"]) < 2){
+            $erreurNom = true;
+        }
+
+        if(!$erreurNom){
+            $commande = "UPDATE AUTEUR SET AUTEUR.nomAuteur = '".$_POST["nom"]."',
                                        AUTEUR.prenomAuteur = '".$_POST["prenom"]."'
                      WHERE AUTEUR.idAuteur = ".$_POST["idAuteur"].";";
-        $suc = $bdd->exec($commande);
-        header("Location: Auteur_show.php?editSuc=".$suc);
+            $suc = $bdd->exec($commande);
+            header("Location: Auteur_show.php?editSuc=".$suc);
+        }
+
+    }
+}
+
+if(isset($_GET)){
+    if(isset($_GET["idToEdit"])){
+        $commande = "SELECT * FROM AUTEUR WHERE AUTEUR.idAuteur = ".$_GET["idToEdit"].";";
+        $auteur = $bdd->query($commande)->fetch();
     }
 }
 
@@ -39,9 +52,11 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
                     </legend>
                     <input type="hidden" value="<?php echo($auteur["idAuteur"]);?>" name="idAuteur">
                     <label for="nom">Nom</label>
-                    <input type="text" name="nom" value="<?php echo($auteur["nomAuteur"]);?>" required><br>
+                    <input type="text" name="nom" value="<?php echo($auteur["nomAuteur"]);?>">
+                    <?php if($erreurNom): ?> <div style="color: red">Erreur le nom contient minimum 2 caractères</div><?php endif; ?>
+                    <br>
                     <label for="prenom">Prenom</label>
-                    <input type="text" name="prenom" value="<?php echo($auteur["prenomAuteur"]);?>" required><br>
+                    <input type="text" name="prenom" value="<?php echo($auteur["prenomAuteur"]);?>"><br>
                     <input type="submit" value="Valider">
                 </fieldset>
             </form>
