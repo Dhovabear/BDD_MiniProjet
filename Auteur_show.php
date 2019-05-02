@@ -24,8 +24,8 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 }
 
 $commande = "SELECT AUTEUR.idAuteur , AUTEUR.nomAuteur , AUTEUR.prenomAuteur , COUNT(OEUVRE.idAuteur) AS nbrOeuvres FROM AUTEUR
-             INNER JOIN OEUVRE ON AUTEUR.idAuteur = OEUVRE.idAuteur
-             GROUP BY OEUVRE.idAuteur;";
+             LEFT JOIN OEUVRE ON AUTEUR.idAuteur = OEUVRE.idAuteur
+             GROUP BY AUTEUR.idAuteur;";
 $auteurs = $bdd->query($commande)->fetchAll();
 
 // affichage de la vue

@@ -6,7 +6,7 @@
                         OEUVRE.dateParution , COUNT(EXEMPLAIRE.noOeuvre) AS nbr,
                         (COUNT(EXEMPLAIRE.noOeuvre) - COUNT(EMPRUNT.noExemplaire)) AS restant  FROM OEUVRE
 					INNER JOIN AUTEUR ON OEUVRE.idAuteur = AUTEUR.idAuteur
-					INNER JOIN EXEMPLAIRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre
+					LEFT JOIN EXEMPLAIRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre
 					LEFT JOIN EMPRUNT ON EXEMPLAIRE.noExemplaire = EMPRUNT.noExemplaire
 					GROUP BY EXEMPLAIRE.noOeuvre;";
 	$oeuvre = $bdd->query($commande)->fetchAll();
