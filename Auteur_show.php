@@ -23,7 +23,9 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 {                    // le formulaire vient d'être soumis
 }
 
-$commande = "SELECT * FROM AUTEUR;";
+$commande = "SELECT AUTEUR.idAuteur , AUTEUR.nomAuteur , AUTEUR.prenomAuteur , COUNT(OEUVRE.idAuteur) AS nbrOeuvres FROM AUTEUR
+             INNER JOIN OEUVRE ON AUTEUR.idAuteur = OEUVRE.idAuteur
+             GROUP BY OEUVRE.idAuteur;";
 $auteurs = $bdd->query($commande)->fetchAll();
 
 // affichage de la vue
@@ -62,13 +64,16 @@ $auteurs = $bdd->query($commande)->fetchAll();
         <table border="2">
             <caption>Liste des auteurs</caption>
             <thead>
-                <tr><th>nom de l'auteur</th><th>prenom de l'auteur</th><th>actions</th></tr>
+                <tr><th>nom de l'auteur</th><th>prenom de l'auteur</th><th>Nombre d'oeuvres</th><th>actions</th></tr>
             </thead>
             <tbody>
                 <?php foreach ($auteurs as $ligne ): ?>
                     <tr>
                         <td><?php echo($ligne["nomAuteur"]); ?></td>
                         <td><?php echo($ligne["prenomAuteur"]); ?></td>
+                        <td>
+                            <?php echo($ligne["nbrOeuvres"]); ?>
+                        </td>
                         <td>
                             <a href="Auteur_delete.php?idToDel=<?php echo($ligne["idAuteur"]) ?>">Supprimer</a>
                             <a href="Auteur_edit.php?idToEdit=<?php echo($ligne["idAuteur"]) ?>">Modifier</a>
