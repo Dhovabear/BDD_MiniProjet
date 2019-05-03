@@ -8,7 +8,7 @@
 					INNER JOIN AUTEUR ON OEUVRE.idAuteur = AUTEUR.idAuteur
 					LEFT JOIN EXEMPLAIRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre
 					LEFT JOIN EMPRUNT ON EXEMPLAIRE.noExemplaire = EMPRUNT.noExemplaire
-					GROUP BY EXEMPLAIRE.noOeuvre;";
+					GROUP BY OEUVRE.noOeuvre;";
 	$oeuvre = $bdd->query($commande)->fetchAll();
 
 ?>
