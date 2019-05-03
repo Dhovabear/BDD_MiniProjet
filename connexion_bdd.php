@@ -1,6 +1,6 @@
 <?php
-define("hostname","serveurmysql");
-define("database","BDD_kvuillau");
+define("hostname","localhost");
+define("database","bdd_kvuillau");
 define("username","kvuillau"); 
 define("password","1111");
 

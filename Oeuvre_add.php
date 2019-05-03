@@ -1,6 +1,11 @@
 <?php
 include("connexion_bdd.php");
 // traitement
+
+if(isset($_GET)){
+
+}
+
 if(isset($_POST)  )  // si il existe certaines variables dans le tableau associatif $_POST
 {                    // le formulaire vient d'être soumis
 

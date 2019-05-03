@@ -7,6 +7,17 @@ $donnesOk = false;
 if(isset($_GET)){
     if(isset($_GET["idToDel"])){
         $donnesOk = true;
+
+
+        $commande = "SELECT COUNT(OEUVRE.noOeuvre) AS nbOeuvres FROM OEUVRE WHERE OEUVRE.idAuteur = ".$_GET["idToDel"]." GROUP BY OEUVRE.idAuteur ;";
+        $nbrOeuvre = $bdd->query($commande)->fetchAll();
+
+        if(!isset($nbrOeuvre[0])){
+            $commande = "DELETE FROM AUTEUR WHERE AUTEUR.idAuteur = ".$_GET["idToDel"].";";
+            $deleteSuccess = $bdd->exec($commande);
+            header("Location: Auteur_show.php?delSuc=".$deleteSuccess);
+        }
+
         $commande = "SELECT * FROM AUTEUR WHERE idAuteur=".$_GET["idToDel"].";";
         $auteur = $bdd->query($commande)->fetch();
 
