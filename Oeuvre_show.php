@@ -37,7 +37,7 @@
                 <td><?php echo($ligne["restant"]); ?></td>
                 <td><a href="https://submeg.files.wordpress.com/2011/12/work-in-progress22.jpg?w=620&h=521&crop=1">Gerer les exemplaires</a></td>
 				<td>
-					<a href="Oeuvre_delete.php?idToDel=<?php echo($ligne["noOeuvre"]) ?>">Supprimer</a>
+					<a href="Oeuvre_delete.php?idToDel=<?php echo($ligne["noOeuvre"]) ?>&nbr=<?php echo($ligne["nbr"]) ?>">Supprimer</a>
 					<a href="Oeuvre_edit.php?idToEdit=<?php echo($ligne["noOeuvre"]) ?>">Modifier</a>
 				</td>
 			</tr>
