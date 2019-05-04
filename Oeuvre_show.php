@@ -2,6 +2,14 @@
 	include("connexion_bdd.php");
 	// auteur titre date parution nbr nbrDispo operations
 
+    $smthgWasDel = false;
+
+    if(isset($_GET)){
+        if(isset($_GET["delSuc"])){
+            $smthgWasDel = true;
+        }
+    }
+
 	$commande = "SELECT OEUVRE.noOeuvre , AUTEUR.idAuteur, AUTEUR.nomAuteur , OEUVRE.titre ,
                         OEUVRE.dateParution , COUNT(EXEMPLAIRE.noOeuvre) AS nbr,
                         (COUNT(EXEMPLAIRE.noOeuvre) - COUNT(EMPRUNT.noExemplaire)) AS restant  FROM OEUVRE
@@ -19,6 +27,14 @@
 
 <div class="row">
 	<div class="titreMenu">Affichage des oeuvres</div>
+    <?php if($smthgWasDel): ?>
+        <?php if($_GET["delSuc"] == 0): ?>
+            <div class="titreMenu" style="color: red">Une erreur est survenu lors de la suppression de l'oeuvre.</div>
+        <?php else: ?>
+            <div class="titreMenu" style="color: green"> Suppression réussie !</div>
+        <?php endif; ?>
+    <?php endif; ?>
+    <a href="Oeuvre_add.php">Ajouter une oeuvre</a>
 	<table border="2">
 		<caption>Liste des Oeuvres</caption>
 		<thead>
