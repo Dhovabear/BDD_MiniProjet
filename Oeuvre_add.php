@@ -8,6 +8,7 @@ $auteurs = $bdd->query($commande)->fetchAll();
 
 $errNom = false;
 $errDate = false;
+$errAuteur = false;
 
 $champTitre = "";
 $champAuteur = 0;
@@ -22,7 +23,12 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
             $champTitre = $_POST["titre"];
         }
 
-        $champAuteur = $_POST["auteur"];
+        if($_POST["auteur"] == 0){
+            $errAuteur = true;
+        }else{
+            $champAuteur = $_POST["auteur"];
+        }
+
 
         $verifDate = dateValide($_POST["date"]);
         if($verifDate == "Veuillez entrer une date valide !" || $verifDate == "Veuillez entrer une date au format jj/mm/aaaa"){
@@ -31,7 +37,7 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
             $champDate = $verifDate;
         }
 
-        if(!$errNom && !$errDate){
+        if(!$errNom && !$errDate && !$errAuteur){
             //On ajoute !
             $commande = "INSERT INTO OEUVRE (noOeuvre,titre,dateParution,idAuteur)
                          VALUES (NULL,'".$_POST["titre"]."','".$verifDate."',".$_POST["auteur"].");";
@@ -61,13 +67,18 @@ if(isset($_GET)){
             <br>
             <label for="auteur">Auteur</label><br>
             <select name="auteur" id="">
+                <option value="0">--Veuillez selectionnez un auteur--</option>
                 <?php foreach ($auteurs as $ligne): ?>
                     <option value="<?php echo($ligne["idAuteur"]);?>" <?php if($ligne["idAuteur"] == $champAuteur){echo("selected");}?>>
                         <?php echo($ligne["prenomAuteur"]);?>
                         <?php echo($ligne["nomAuteur"]);?>
                     </option>
                 <?php endforeach; ?>
-            </select><br><br>
+            </select><br>
+            <?php if($errAuteur): ?>
+                <div class="erreur" style="color: red">Veuillez entrez un auteur valide !</div>
+            <?php endif; ?>
+            <br>
             <label for="date">Date de parution</label>
             <input type="text" name="date" value="<?php echo($champDate)?>">
             <?php if($errDate): ?>
