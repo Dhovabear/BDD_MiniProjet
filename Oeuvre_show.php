@@ -10,14 +10,27 @@
         }
     }
 
-	$commande = "SELECT OEUVRE.noOeuvre , AUTEUR.idAuteur, AUTEUR.nomAuteur , OEUVRE.titre ,
+	/*$commande = "SELECT OEUVRE.noOeuvre , AUTEUR.idAuteur, AUTEUR.nomAuteur , OEUVRE.titre ,
                         OEUVRE.dateParution , COUNT(EXEMPLAIRE.noOeuvre) AS nbr,
-                        (COUNT(EXEMPLAIRE.noOeuvre) - COUNT(EMPRUNT.noExemplaire)) AS restant  FROM OEUVRE
+                       (COUNT(EXEMPLAIRE.noOeuvre) - COUNT(EMPRUNT.noExemplaire)) AS restant  FROM OEUVRE
 					INNER JOIN AUTEUR ON OEUVRE.idAuteur = AUTEUR.idAuteur
 					LEFT JOIN EXEMPLAIRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre
 					LEFT JOIN EMPRUNT ON EXEMPLAIRE.noExemplaire = EMPRUNT.noExemplaire
 					GROUP BY OEUVRE.noOeuvre;";
-	$oeuvre = $bdd->query($commande)->fetchAll();
+    */
+
+	$commande2 = "SELECT AUTEUR.nomAuteur, OEUVRE.titre, OEUVRE.noOeuvre, OEUVRE.dateParution
+	              , COUNT(E1.noExemplaire) AS nbr
+	              , COUNT(E2.noexemplaire) AS restant
+	              FROM OEUVRE
+	              JOIN AUTEUR ON AUTEUR.idAuteur = OEUVRE.idAuteur
+	              LEFT JOIN EXEMPLAIRE E1 ON E1.noOeuvre = OEUVRE.noOeuvre
+	              LEFT JOIN EXEMPLAIRE E2 ON E2.noExemplaire = E1.noExemplaire
+	                  AND E2.noExemplaire NOT IN (SELECT EMPRUNT.noExemplaire FROM EMPRUNT WHERE EMPRUNT.dateRendu IS NULL)
+	              GROUP BY OEUVRE.noOeuvre
+	              ORDER BY AUTEUR.nomAuteur ASC, OEUVRE.titre ASC;";
+
+	$oeuvre = $bdd->query($commande2)->fetchAll();
 
 ?>
 
