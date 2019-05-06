@@ -11,24 +11,27 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 <?php include ("v_head.php");  ?>
 <?php include ("v_nav.php");  ?>
 
+
+
 <?php
+  if(isset($_POST["form_insert_Adherent_Valider"]) AND isset($_POST["nomAdherent"])  AND isset($_POST["adresse"]) AND isset($_POST["datePaiement"])){
+
+      $nomAdherent=$_POST["nomAdherent"];
+      $adresse=$_POST["adresse"];
+      $datePaiement=$_POST["datePaiement"];
 
 
 
-if(isset($_POST["form_insert_Adherent_Valider"]) AND isset($_POST["nomAdherent"])  AND isset($_POST["adresse"]) AND isset($_POST["datePaiement"])){
+      $chaine_SQL="INSERT INTO ADHERENT (idAdherent,nomAdherent,adresse,datePaiement) VALUES ( NULL,'".$nomAdherent."','".$adresse."','".$datePaiement."');";
 
-    $nomAdherent=$_POST["nomAdherent"];
-    $adresse=$_POST["adresse"];
-    $datePaiement=$_POST["datePaiement"];
+      $nbrInsert= $bdd->query($chaine_SQL);
+
+      header("Location: Adherent_show.php");
+      }
 
 
-
-    $chaine_SQL="INSERT INTO ADHERENT (idAdherent,nomAdherent,adresse,datePaiement) VALUES ( NULL,'".$nomAdherent."','".$adresse."','".$datePaiement."');";
-
-    $nbrInsert= $bdd->query($chaine_SQL);
-    // header("Location: Etudiant_show_result.php");
-    }
 ?>
+
 <div class="row">
   <form action="#" method="post">
     <fieldset>
