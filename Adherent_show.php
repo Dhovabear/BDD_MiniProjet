@@ -37,7 +37,7 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
             echo "<tr><td>".$row['idAdherent']."</td><td>".$row['nomAdherent'].
             "</td><td>".$row['adresse']."</td><td>".$row['datePaiement'].
             "</td><td><a href='Adherent_show.php?suprimer=".$row['idAdherent'].
-            "'>Suprimer</a></td>";?>
+            "'>Suprimer</a></td><td><a href='Adherent_edit.php?idToEdit=".$row['idAdherent']."'>Modifier</a></td>";?>
     <?php endforeach;?>
   </table>
 </div>
