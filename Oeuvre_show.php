@@ -35,31 +35,38 @@
         <?php endif; ?>
     <?php endif; ?>
     <a href="Oeuvre_add.php">Ajouter une oeuvre</a>
-	<table border="2">
-		<caption>Liste des Oeuvres</caption>
-		<thead>
-		<tr><th>Nom de l'auteur</th><th>Titre de l'oeuvre </th>
-            <th>Date de parution</th><th>Nombre d'exemplaires</th>
-            <th>Nombre disponibles</th><th>Exemplaires</th>
-            <th>actions</th></tr>
-		</thead>
-		<tbody>
-        <?php foreach ($oeuvre as $ligne ): ?>
-			<tr>
-				<td><?php echo($ligne["nomAuteur"]); ?></td>
-				<td><?php echo($ligne["titre"]); ?></td>
-				<td><?php echo($ligne["dateParution"]); ?></td>
-                <td><?php echo($ligne["nbr"]); ?></td>
-                <td><?php echo($ligne["restant"]); ?></td>
-                <td><a href="https://submeg.files.wordpress.com/2011/12/work-in-progress22.jpg?w=620&h=521&crop=1">Gerer les exemplaires</a></td>
-				<td>
-					<a href="Oeuvre_delete.php?idToDel=<?php echo($ligne["noOeuvre"]) ?>&nbr=<?php echo($ligne["nbr"]) ?>">Supprimer</a>
-					<a href="Oeuvre_edit.php?idToEdit=<?php echo($ligne["noOeuvre"]) ?>">Modifier</a>
-				</td>
-			</tr>
-        <?php endforeach; ?>
-		</tbody>
-	</table>
+
+    <?php if(isset($oeuvre[0])): ?>
+        <table border="2">
+            <caption>Liste des Oeuvres</caption>
+            <thead>
+            <tr><th>Nom de l'auteur</th><th>Titre de l'oeuvre </th>
+                <th>Date de parution</th><th>Nombre d'exemplaires</th>
+                <th>Nombre disponibles</th><th>Exemplaires</th>
+                <th>actions</th></tr>
+            </thead>
+            <tbody>
+
+            <?php foreach ($oeuvre as $ligne ): ?>
+                <tr>
+                    <td><?php echo($ligne["nomAuteur"]); ?></td>
+                    <td><?php echo($ligne["titre"]); ?></td>
+                    <td><?php echo($ligne["dateParution"]); ?></td>
+                    <td><?php echo($ligne["nbr"]); ?></td>
+                    <td><?php echo($ligne["restant"]); ?></td>
+                    <td><a href="https://submeg.files.wordpress.com/2011/12/work-in-progress22.jpg?w=620&h=521&crop=1">Gerer les exemplaires</a></td>
+                    <td>
+                        <a href="Oeuvre_delete.php?idToDel=<?php echo($ligne["noOeuvre"]) ?>&nbr=<?php echo($ligne["nbr"]) ?>">Supprimer</a>
+                        <a href="Oeuvre_edit.php?idToEdit=<?php echo($ligne["noOeuvre"]) ?>">Modifier</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <div class="titreMenu">Aucune Oeuvre enregistrée dans la base de donnés</div>
+    <?php endif;?>
+
 
 </div>
 
