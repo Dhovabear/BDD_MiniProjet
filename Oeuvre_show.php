@@ -3,21 +3,20 @@
 	// auteur titre date parution nbr nbrDispo operations
 
     $smthgWasDel = false;
+    $smthgWasAdd = false;
+    $smthgWasEdit = false;
 
     if(isset($_GET)){
         if(isset($_GET["delSuc"])){
             $smthgWasDel = true;
         }
+        if(isset($_GET["addSuc"])){
+            $smthgWasAdd = true;
+        }
+        if(isset($_GET["editSuc"])){
+            $smthgWasEdit = true;
+        }
     }
-
-	/*$commande = "SELECT OEUVRE.noOeuvre , AUTEUR.idAuteur, AUTEUR.nomAuteur , OEUVRE.titre ,
-                        OEUVRE.dateParution , COUNT(EXEMPLAIRE.noOeuvre) AS nbr,
-                       (COUNT(EXEMPLAIRE.noOeuvre) - COUNT(EMPRUNT.noExemplaire)) AS restant  FROM OEUVRE
-					INNER JOIN AUTEUR ON OEUVRE.idAuteur = AUTEUR.idAuteur
-					LEFT JOIN EXEMPLAIRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre
-					LEFT JOIN EMPRUNT ON EXEMPLAIRE.noExemplaire = EMPRUNT.noExemplaire
-					GROUP BY OEUVRE.noOeuvre;";
-    */
 
 	$commande2 = "SELECT AUTEUR.nomAuteur, OEUVRE.titre, OEUVRE.noOeuvre, OEUVRE.dateParution
 	              , COUNT(E1.noExemplaire) AS nbr
@@ -47,6 +46,23 @@
             <div class="titreMenu" style="color: green"> Suppression réussie !</div>
         <?php endif; ?>
     <?php endif; ?>
+
+    <?php if($smthgWasAdd): ?>
+        <?php if($_GET["addSuc"] == 0): ?>
+            <div class="titreMenu" style="color: red">Une erreur est survenu lors de l'ajout de l'oeuvre.</div>
+        <?php else: ?>
+            <div class="titreMenu" style="color: green"> Ajout réussie !</div>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if($smthgWasEdit): ?>
+        <?php if($_GET["addSuc"] == 0): ?>
+            <div class="titreMenu" style="color: red">Une erreur est survenu lors de la modification de l'oeuvre.</div>
+        <?php else: ?>
+            <div class="titreMenu" style="color: green"> Modification réussie !</div>
+        <?php endif; ?>
+    <?php endif; ?>
+
     <a href="Oeuvre_add.php">Ajouter une oeuvre</a>
 
     <?php if(isset($oeuvre[0])): ?>
