@@ -20,10 +20,9 @@ if(isset($_GET)){
       $nomAdherent=$_POST["nomAdherent"];
       $adresse=$_POST["adresse"];
       $datePaiement=$_POST["datePaiement"];
+      $idAdherent = $_GET['idToEdit'];
 
-
-
-      $chaine_SQL="UPDATE ADHERENT SET nomAdherent='".$nomAdherent."',adresse='".$adresse."',datePaiement'".$datePaiement."') WHERE idAdherent='".$_GET['idAdherent']."';'";
+      $chaine_SQL="UPDATE ADHERENT SET nomAdherent='".$nomAdherent."',adresse='".$adresse."',datePaiement'".$datePaiement."'WHERE idAdherent='".$idAdherent."';";
 
       $nbrInsert= $bdd->query($chaine_SQL);
 
@@ -37,7 +36,7 @@ if(isset($_GET)){
 <?php include ("v_nav.php");  ?>
 
 <div class="row">
-  <form action="Adherent_edit.php?idToEdit="<?php echo $_GET['idAdherent']?>. method="post">
+  <form action="Adherent_edit.php?idToEdit=<?php echo $adherent['idAdherent'] ?>" method="post">
     <fieldset>
       nom : <input type="text" name="nomAdherent" value="<?php echo $adherent['nomAdherent']?>" />
       adresse : <input type="text" name="adresse" value="<?php echo $adherent['adresse']?>" />
