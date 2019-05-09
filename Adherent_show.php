@@ -41,6 +41,5 @@ include("fonctionsUtiles.php")
             "'>Suprimer</a></td><td><a href='Adherent_edit.php?idToEdit=".$row['idAdherent']."'>Modifier</a></td>";?>
     <?php endforeach;?>
   </table>
-
 </div>
 <?php include ("v_foot.php");  ?>

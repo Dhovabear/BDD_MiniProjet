@@ -40,7 +40,7 @@ if(isset($_GET)){
     <fieldset>
       nom : <input type="text" name="nomAdherent" value="<?php echo $adherent['nomAdherent']?>" />
       adresse : <input type="text" name="adresse" value="<?php echo $adherent['adresse']?>" />
-      date de paiement : <input type="date" name="datePaiement" value="<?php echo $adherent['datePaiement']?>" />
+      date de paiement : <input type="text" name="datePaiement" value="<?php echo $adherent['datePaiement']?>" />
       <input type="submit" name="form_insert_Adherent_Valider" value="Valider" />
     </fieldset>
   </form>
