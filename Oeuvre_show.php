@@ -56,7 +56,7 @@
     <?php endif; ?>
 
     <?php if($smthgWasEdit): ?>
-        <?php if($_GET["addSuc"] == 0): ?>
+        <?php if($_GET["editSuc"] == 0): ?>
             <div class="titreMenu" style="color: red">Une erreur est survenu lors de la modification de l'oeuvre.</div>
         <?php else: ?>
             <div class="titreMenu" style="color: green"> Modification réussie !</div>
@@ -83,7 +83,7 @@
                     <td><?php echo($ligne["dateParution"]); ?></td>
                     <td><?php echo($ligne["nbr"]); ?></td>
                     <td><?php echo($ligne["restant"]); ?></td>
-                    <td><a href="https://submeg.files.wordpress.com/2011/12/work-in-progress22.jpg?w=620&h=521&crop=1">Gerer les exemplaires</a></td>
+                    <td><a href="Exemplaire_show.php?noOeuvre=<?php echo($ligne["noOeuvre"])?>">Gerer les exemplaires</a></td>
                     <td>
                         <a href="Oeuvre_delete.php?idToDel=<?php echo($ligne["noOeuvre"]) ?>&nbr=<?php echo($ligne["nbr"]) ?>">Supprimer</a>
                         <a href="Oeuvre_edit.php?idToEdit=<?php echo($ligne["noOeuvre"]) ?>">Modifier</a>
