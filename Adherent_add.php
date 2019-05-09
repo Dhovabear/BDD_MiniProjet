@@ -15,7 +15,12 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 
 
 <?php
-
+$nomAdherent ="";
+$adresse ="";
+$datePaiement ="";
+$testNom=true;
+$testAdresse=true;
+$testDate =true;
 
   if(isset($_POST["form_insert_Adherent_Valider"]) AND isset($_POST["nomAdherent"])  AND isset($_POST["adresse"]) AND isset($_POST["datePaiement"])){
 
@@ -45,9 +50,8 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
         $chaine_SQL="INSERT INTO ADHERENT (idAdherent,nomAdherent,adresse,datePaiement) VALUES ( NULL,'".$nomAdherent."','".$adresse."','".$datePaiement."');";
 
         $nbrInsert= $bdd->query($chaine_SQL);
-
+        header("Location: Adherent_show.php");
       }
-      header("Location: Adherent_show.php");
       }
 
 
@@ -56,9 +60,12 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 <div class="row">
   <form action="#" method="post">
     <fieldset>
-      nom : <input type="text" name="nomAdherent" value="" required/>
-      adresse : <input type="text" name="adresse" value="" required/>
-      date de paiement : <input type="date" name="datePaiement" value="" required/>
+      nom : <input type="text" name="nomAdherent" value="<?php if($testNom == true){echo $nomAdherent;}; ?>" />
+      <div class="erreur"><?php if($testNom == false){echo $nomAdherent;}; ?></div>
+      adresse : <input type="text" name="adresse" value="<?php if($testAdresse == true){echo $adresse;}; ?>" />
+      <div class="erreur"><?php if($testAdresse == false){echo $adresse;}; ?></div>
+      date de paiement : <input type="text" name="datePaiement" value="<?php if($testDate == true){echo $datePaiement;}; ?>" />
+      <div class="erreur"><?php if($testDate == false){echo $datePaiement;}; ?></div>
       <input type="submit" name="form_insert_Adherent_Valider" value="Valider" />
     </fieldset>
   </form>
