@@ -22,7 +22,7 @@ if(isset($_GET)){
       $datePaiement=$_POST["datePaiement"];
       $idAdherent = $_GET['idToEdit'];
 
-      $chaine_SQL="UPDATE ADHERENT SET nomAdherent='".$nomAdherent."',adresse='".$adresse."',datePaiement'".$datePaiement."'WHERE idAdherent='".$idAdherent."';";
+      $chaine_SQL="UPDATE ADHERENT SET nomAdherent='".$nomAdherent."',adresse='".$adresse."',datePaiement='".$datePaiement."' WHERE idAdherent='".$idAdherent."';";
 
       $nbrInsert= $bdd->query($chaine_SQL);
 
