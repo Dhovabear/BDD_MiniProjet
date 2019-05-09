@@ -15,18 +15,38 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 
 
 <?php
+
+
   if(isset($_POST["form_insert_Adherent_Valider"]) AND isset($_POST["nomAdherent"])  AND isset($_POST["adresse"]) AND isset($_POST["datePaiement"])){
 
-      $nomAdherent=$_POST["nomAdherent"];
-      $adresse=$_POST["adresse"];
-      $datePaiement=$_POST["datePaiement"];
+      $nomAdherent=texteValide($_POST["nomAdherent"]);
+      $adresse=texteValide($_POST["adresse"]);
+      $datePaiement=dateValide($_POST["datePaiement"]);
 
+      if($nomAdherent ==  "Veuillez rentrer un texte de plus de deux charactère, espace exclus"){
+        $testNom = false;
+      }else {
+        $testNom = true;
+      }
 
+      if($adresse ==  "Veuillez rentrer un texte de plus de deux charactère, espace exclus"){
+        $testAdresse = false;
+      }else {
+        $testAdresse = true;
+      }
 
-      $chaine_SQL="INSERT INTO ADHERENT (idAdherent,nomAdherent,adresse,datePaiement) VALUES ( NULL,'".$nomAdherent."','".$adresse."','".$datePaiement."');";
+      if($datePaiement ==   "Veuillez entrer une date valide !" || $datePaiement == "Veuillez entrer une date au format jj/mm/aaaa"){
+        $testDate = false;
+      }else {
+        $testDate = true;
+      }
 
-      $nbrInsert= $bdd->query($chaine_SQL);
+      if (($testNom == true) AND ($testDate == true) AND ($testAdresse == true)){
+        $chaine_SQL="INSERT INTO ADHERENT (idAdherent,nomAdherent,adresse,datePaiement) VALUES ( NULL,'".$nomAdherent."','".$adresse."','".$datePaiement."');";
 
+        $nbrInsert= $bdd->query($chaine_SQL);
+
+      }
       header("Location: Adherent_show.php");
       }
 

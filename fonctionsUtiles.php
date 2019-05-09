@@ -23,7 +23,7 @@ function dateBddToFr($texte){
 
 function texteValide($texte){
   $textSansEspace = (str_replace(" ","",$texte) );
-  if( ($textSansEspace == '') or ( strlen(str_replace(" ","",$texte))< 2)){
+  if(( strlen(str_replace(" ","",$texte))< 2)){
     return "Veuillez rentrer un texte de plus de deux charactère, espace exclus";
   }else{
     return $texte;
