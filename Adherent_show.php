@@ -1,10 +1,11 @@
 <?php
 include("connexion_bdd.php");
+include("fonctionsUtiles.php")
 // traitement
-if(isset($_POST)  )  // si il existe certaines variables dans le tableau associatif $_POST
-{                    // le formulaire vient d'être soumis
-
-}
+// if(isset($_POST)  )  // si il existe certaines variables dans le tableau associatif $_POST
+// {                    // le formulaire vient d'être soumis
+//
+// }
 
 // affichage de la vue
 ?>
@@ -40,5 +41,6 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
             "'>Suprimer</a></td><td><a href='Adherent_edit.php?idToEdit=".$row['idAdherent']."'>Modifier</a></td>";?>
     <?php endforeach;?>
   </table>
+
 </div>
 <?php include ("v_foot.php");  ?>
