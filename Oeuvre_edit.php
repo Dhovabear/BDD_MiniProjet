@@ -35,9 +35,9 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 
         if(!$errNom && !$errDate && !$errAuteur){
             //On ajoute !
-            $commande = "UPDATE OEUVRE SET OEUVRE.titre = ".$_POST["titre"].",
+            $commande = "UPDATE OEUVRE SET OEUVRE.titre = ".$bdd->quote($_POST["titre"]).",
                                            OEUVRE.idAuteur = ".$_POST["auteur"].",
-                                           OEUVRE.dateParution = ".$_POST["date"]."
+                                           OEUVRE.dateParution = '".$verifDate."'
                                            WHERE OEUVRE.noOeuvre = ".$_POST["noOeuvre"].";";
             $succ = $bdd->exec($commande);
             header("Location: Oeuvre_show.php?editSuc=".$succ);
@@ -75,7 +75,7 @@ if(isset($_GET)){
             <select name="auteur" id="">
                 <option value="0">--Veuillez selectionnez un auteur--</option>
                 <?php foreach ($auteurs as $ligne): ?>
-                    <option value="<?php echo($ligne["idAuteur"]);?>" <?php if($ligne["idAuteur"] == $oeuvre["noOeuvre"]){echo("selected");}?>>
+                    <option value="<?php echo($ligne["idAuteur"]);?>" <?php if($ligne["idAuteur"] == $oeuvre["idAuteur"]){echo("selected");}?>>
                         <?php echo($ligne["prenomAuteur"]);?>
                         <?php echo($ligne["nomAuteur"]);?>
                     </option>
