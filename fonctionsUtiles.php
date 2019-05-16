@@ -12,6 +12,18 @@ function dateValide($texte){
     }
 }
 
+function dateValideRicain($texte){
+    if(preg_match("#^([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})$#",$texte,$matches)){
+        if(checkdate($matches[2] , $matches[3] , $matches[1])){
+            return "ok";
+        }else{
+            return "Veuillez entrer une date valide !";
+        }
+    }else {
+        return "Veuillez entrer une date au format jj/mm/aaaa";
+    }
+}
+
 
 function dateBddToFr($texte){
     if(preg_match("#^([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})$#",$texte,$matches)){
