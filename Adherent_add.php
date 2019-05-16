@@ -64,7 +64,7 @@ $testDate =true;
       <div class="erreur"><?php if($testNom == false){echo $nomAdherent;}; ?></div>
       adresse : <input type="text" name="adresse" value="<?php if($testAdresse == true){echo $adresse;}; ?>" />
       <div class="erreur"><?php if($testAdresse == false){echo $adresse;}; ?></div>
-      date de paiement : <input type="text" name="datePaiement" value="<?php if($testDate == true){echo $datePaiement;}; ?>" />
+      date de paiement : <input type="text" name="datePaiement" value="<?php if($testDate == true){echo dateBddToFr($datePaiement);}; ?>" />
       <div class="erreur"><?php if($testDate == false){echo $datePaiement;}; ?></div>
       <input type="submit" name="form_insert_Adherent_Valider" value="Valider" />
     </fieldset>

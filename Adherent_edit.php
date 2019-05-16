@@ -19,7 +19,6 @@ if(isset($_GET)){
     if(isset($_GET["idToEdit"])){
         $commande = "SELECT * FROM ADHERENT WHERE idAdherent = ".$_GET["idToEdit"].";";
         $adherent = $bdd->query($commande)->fetch();
-        echo "string";
     }
 }
 
@@ -28,7 +27,7 @@ if(isset($_GET)){
 
       $nomAdherent=texteValide($_POST["nomAdherent"]);
       $adresse=texteValide($_POST["adresse"]);
-      $datePaiement=texteValide($_POST["datePaiement"]);
+      $datePaiement=dateValide($_POST["datePaiement"]);
       $idAdherent = $_GET['idToEdit'];
 
       if($nomAdherent ==  "Veuillez rentrer un texte de plus de deux charactère, espace exclus"){
@@ -72,7 +71,7 @@ if(isset($_GET)){
       <div class="erreur"><?php if($testNom == false){echo $nomAdherent;}; ?></div>
       adresse : <input type="text" name="adresse" value="<?php echo $adherent['adresse']?>" />
       <div class="erreur"><?php if($testAdresse == false){echo $adresse;}; ?></div>
-      date de paiement : <input type="text" name="datePaiement" value="<?php echo $adherent['datePaiement']?>" />
+      date de paiement : <input type="text" name="datePaiement" value="<?php echo dateBddToFr($adherent['datePaiement'])?>" />
       <div class="erreur"><?php if($testDate == false){echo $datePaiement;}; ?></div>
       <input type="submit" name="form_insert_Adherent_Valider" value="Valider" />
     </fieldset>
