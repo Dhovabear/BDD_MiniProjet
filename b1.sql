@@ -79,12 +79,11 @@ CREATE TABLE EXEMPLAIRE(
 
 CREATE TABLE EMPRUNT(
         idAdherent   Int NOT NULL ,
-        dateEmprunt  Date NOT NULL ,
         noExemplaire Int NOT NULL ,
+        dateEmprunt  Date NOT NULL ,
         dateRendu    Date
 	,CONSTRAINT EMPRUNT_PK PRIMARY KEY (idAdherent,dateEmprunt,noExemplaire)
 
 	,CONSTRAINT EMPRUNT_ADHERENT_FK FOREIGN KEY (idAdherent) REFERENCES ADHERENT(idAdherent) ON DELETE CASCADE
-	,CONSTRAINT EMPRUNT_date0_FK FOREIGN KEY (dateEmprunt) REFERENCES date(dateEmprunt) ON DELETE CASCADE
 	,CONSTRAINT EMPRUNT_EXEMPLAIRE1_FK FOREIGN KEY (noExemplaire) REFERENCES EXEMPLAIRE(noExemplaire) ON DELETE CASCADE
 )ENGINE=InnoDB;

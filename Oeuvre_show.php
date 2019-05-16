@@ -25,7 +25,7 @@
 	              JOIN AUTEUR ON AUTEUR.idAuteur = OEUVRE.idAuteur
 	              LEFT JOIN EXEMPLAIRE E1 ON E1.noOeuvre = OEUVRE.noOeuvre
 	              LEFT JOIN EXEMPLAIRE E2 ON E2.noExemplaire = E1.noExemplaire
-	                  AND E2.noExemplaire NOT IN (SELECT EMPRUNT.noExemplaire FROM EMPRUNT WHERE EMPRUNT.dateRendu IS NULL)
+	                  AND E2.noExemplaire NOT IN (SELECT EMPRUNT.noExemplaire FROM EMPRUNT WHERE EMPRUNT.dateRendu = '0000-00-00' OR EMPRUNT.dateRendu = NULL)
 	              GROUP BY OEUVRE.noOeuvre
 	              ORDER BY AUTEUR.nomAuteur ASC, OEUVRE.titre ASC;";
 
