@@ -22,10 +22,15 @@ include ("fonctionsUtiles.php")
       $suprRes= $bdd->exec($chaine_SQL2);
     }
     $chaine_SQL="SELECT * FROM ADHERENT;";
-
+    $chaine_SQL3="SELECT ADHERENT.idAdherent, EMPRUNT.dateEmprunt, COUNT(EMPRUNT.idAdherent) AS gounter
+                  FROM ADHERENT
+                  LEFT JOIN EMPRUNT ON EMPRUNT.idAdherent = ADHERENT.idAdherent
+                  GROUP BY EMPRUNT.idAdherent;";
 
     $reponse= $bdd->query($chaine_SQL);
     $donnee = $reponse->fetchAll();
+    $emp = $bdd->query($chaine_SQL3);
+    $compte= $emp->fetchAll();
     // header("Location: Etudiant_show_result.php");
 
 
@@ -41,5 +46,9 @@ include ("fonctionsUtiles.php")
             "'>Suprimer</a></td><td><a href='Adherent_edit.php?idToEdit=".$row['idAdherent']."'>Modifier</a></td>";?>
     <?php endforeach;?>
   </table>
+
+  <?php foreach ($compte as $row) {
+    echo $row['idAdherent']." nbr= ".$row['gounter']."<br>";
+  };?>
 </div>
 <?php include ("v_foot.php");  ?>
