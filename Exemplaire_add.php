@@ -35,6 +35,11 @@ if(isset($_POST["noOeuvre"]) && isset($_POST["dateAchat"]) && isset($_POST["prix
         $champDate = $_POST["dateAchat"];
     }
 
+    if($_POST["prix"] > 0){
+        $champprix = $_POST["prix"];
+    }else{
+        $errPrix = true;
+    }
 
 
 }
@@ -65,8 +70,8 @@ if(isset($_GET["idOeuvre"])){
                 <input type="radio" name="etat" value="4" <?php if($champEtat == 4){echo "checked";} ?>> MAUVAIS
                 <br>
                 <br>
-                <label for="dateAchat">Date achat: </label> <input type="text" name="dateAchat"><br>
-                <label for="prix">Prix: </label><input type="text" name="prix"><br>
+                <label for="dateAchat">Date achat: </label> <input type="text" name="dateAchat" value="<?php echo $champDate ?>"><br>
+                <label for="prix">Prix: </label><input type="text" name="prix" value="<?php echo $champprix ?>"><br>
                 <input type="submit" value="Ajouter">
 
             </fieldset>
