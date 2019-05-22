@@ -11,7 +11,7 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 }
 
 $numOeuvre = 0;
-
+$nbrOeuvr = 0;
 if(isset($_GET)){
     if(isset($_GET["noOeuvre"])){
         $numOeuvre = $_GET["noOeuvre"];
@@ -35,6 +35,17 @@ $oeuvrInfo = $bdd->query($commande)->fetch();
 
 
 
+foreach ($exemplaires as $ligne){
+    $commande = "SELECT EXEMPLAIRE.noExemplaire NOT IN(SELECT EMPRUNT.noExemplaire FROM EMPRUNT WHERE EMPRUNT.dateRendu = '0000-00-00' OR EMPRUNT.dateRendu IS NULL) AS dispo FROM EXEMPLAIRE
+                                 INNER JOIN OEUVRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre
+                                 WHERE OEUVRE.noOeuvre = ".$numOeuvre." AND EXEMPLAIRE.noExemplaire = ".$ligne["noExemplaire"].";";
+    $res = $bdd->query($commande)->fetch();
+    if($res["dispo"]){
+        $nbrOeuvr++;
+    }
+}
+
+
 // affichage de la vue
 ?>
 <?php include("v_head.php");  ?>
@@ -45,7 +56,7 @@ $oeuvrInfo = $bdd->query($commande)->fetch();
 
 <div class="row">
     <div class="titreMenu">Exemplaires de l'oeuvre '<?php echo($oeuvre["titre"]) ?>' </div>
-    <div class="titreMenu">Nombre d'exemplaire(s): <?php echo($oeuvrInfo["nbr"]) ?> ,  Restant(s):   </div>
+    <div class="titreMenu">Nombre d'exemplaire(s): <?php echo($oeuvrInfo["nbr"]) ?> ,  Restant(s): <?php echo $nbrOeuvr ?> </div>
 
     <br>
 
@@ -63,14 +74,13 @@ $oeuvrInfo = $bdd->query($commande)->fetch();
                 <?php
                     $style = "";
                     $isDispo = "(indisponible) ";
-                    $commande = "SELECT EXEMPLAIRE.noExemplaire NOT IN(SELECT EMPRUNT.noExemplaire FROM EMPRUNT WHERE EMPRUNT.dateRendu = '0000-00-00' OR EMPRUNT.dateRendu = NULL) AS dispo FROM EXEMPLAIRE
+                    $commande = "SELECT EXEMPLAIRE.noExemplaire NOT IN(SELECT EMPRUNT.noExemplaire FROM EMPRUNT WHERE EMPRUNT.dateRendu = '0000-00-00' OR EMPRUNT.dateRendu IS NULL) AS dispo FROM EXEMPLAIRE
                                  INNER JOIN OEUVRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre
                                  WHERE OEUVRE.noOeuvre = ".$numOeuvre." AND EXEMPLAIRE.noExemplaire = ".$ligne["noExemplaire"].";";
                     $res = $bdd->query($commande)->fetch();
                     if($res["dispo"]){
                         $style = "background-color:lime;";
                         $isDispo = "(disponible) ";
-
                     }
                 ?>
                 <tr style="<?php echo($style) ?>">
