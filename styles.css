@@ -2,22 +2,28 @@
 nav
 {
     position:absolute; top:2%; left:2%;visibility:visible; width:96%; height:40px;
-    border-bottom: 2px solid Black;z-index:5;
+    /* border-bottom: 2px solid Black; */
+    z-index:5;
     font-size: 14px;
     margin-right:5px;
 
+
+}
+
+html{
+  background-color: #cecece;
 }
 .titreMenu {
     height: 40px;
-
 }
+
 .boutonMenu {
     display:block;
     float: left;
     width: 200px;
     height: 40px;
-    background-color: #EEEEEE;
-    border: 1px solid Black;
+    background-color: #42678e ;
+    border: 1px solid #102533 ;
     margin-left: 40px;
     text-align: center;
     vertical-align:middle;
@@ -28,22 +34,24 @@ nav
 .boutonMenu:hover {
     height: auto;
     cursor: pointer;
-    background-color: #CCCCDE;
+    background-color: #6f9edf;
 }
 
 .SousMenu {
     display: block;
     height: 40px;
-    border: 1px solid Black;
-    background-color: #EEEEEE;
+    border: 1px solid #102533 ;
+    background-color: #42678e;
     z-index:8;
     color:black;
     vertical-align:middle;
     text-decoration:none;
 }
 .SousMenu:hover {
-    background:#CCCCEE;
+    background:#6f9edf;
 }
+
+
 
 /****************************************** zone de travail*/
 div.row, .container

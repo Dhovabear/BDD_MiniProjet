@@ -27,8 +27,8 @@ include ("fonctionsUtiles.php")
                   , EMPRUNT.dateEmprunt, COUNT(EMPRUNT.idAdherent) AS gounter
                   FROM ADHERENT
                   LEFT JOIN EMPRUNT ON EMPRUNT.idAdherent = ADHERENT.idAdherent
-                  GROUP BY ADHERENT.idAdherent;
-                  ORDER BY ADHERENT.idAdherent";
+                  GROUP BY ADHERENT.idAdherent
+                  ORDER BY ADHERENT.idAdherent;";
 
     $reponse= $bdd->query($chaine_SQL);
     $donnee = $reponse->fetchAll();
