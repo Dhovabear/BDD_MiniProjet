@@ -1,14 +1,13 @@
 <?php
-include ("connexion_bdd.php");
-$adPost = 3;
-$commandeBilan = "SELECT ADHERENT.nomAdherent, OEUVRE.titre, EMPRUNT.dateEmprunt
-                , COUNT(EXEMPLAIRE.noExemplaire) as nbrEx
-                FROM EXEMPLAIRE
-                INNER JOIN OEUVRE ON ADHERENT.idAdherent = EMPRUNT.idAdherent
+$commandeBilan = "SELECT ADHERENT.nomAdherent, OEUVRE.titre, EMPRUNT.dateEmprunt , COUNT(EXEMPLAIRE.noExemplaire) as nbrEx
+                FROM EMPRUNT
+                INNER JOIN ADHERENT ON ADHERENT.idAdherent = EMPRUNT.idAdherent
                 INNER JOIN EXEMPLAIRE ON EMPRUNT.noExemplaire = EXEMPLAIRE.noExemplaire
-                INNER JOIN OEUVRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre;";
-  // $commandeBilan = $commandeBilan."WHERE ADHERENT.idAdherent =  GROUP BY OEUVRE.noOeuvre ;";
-  // ".$adPost."
+                INNER JOIN OEUVRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre
+                WHERE ADHERENT.idAdherent =".$adPost."
+                GROUP BY OEUVRE.noOeuvre;";
+
+
 
 $empr = $bdd->query($commandeBilan)->fetchAll();
 ?>
