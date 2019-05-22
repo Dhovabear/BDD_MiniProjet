@@ -108,7 +108,7 @@ span.erreur,div#stock_formulaire span.erreur
 }
 input[type=submit]{
     margin-top: 10px;
-    width: 100px;
+    width: 150px;
 }
 input[type=radio]{
     display: inline;
