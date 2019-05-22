@@ -123,7 +123,7 @@ foreach ($exemplaires as $ligne){
             <td><?php echo($ligne["dateAchat"]) ?></td>
             <td><?php echo($ligne["prix"]) ?></td>
             <td>
-                <a href="Exemplaire_edit.php?idToEdit=<?php echo($ligne["noExemplaire"]) ?>">Modifier</a>
+                <a href="Exemplaire_edit.php?idToEdit=<?php echo($ligne["noExemplaire"]) ?>&noOeuvre=<?php echo($oeuvre["noOeuvre"]) ?>">Modifier</a>
                 <a href="Exemplaire_delete.php?idToDel=<?php echo($ligne["noExemplaire"]) ?>&noOeuvre=<?php echo $oeuvre["noOeuvre"]?>">Supprimer</a>
             </td>
         </tr>
