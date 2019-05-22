@@ -11,10 +11,18 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 }
 
 $numOeuvre = 0;
+
+$smtWasAdd = false;
+$addSuc = 0;
+
 $nbrOeuvr = 0;
 if(isset($_GET)){
     if(isset($_GET["noOeuvre"])){
         $numOeuvre = $_GET["noOeuvre"];
+    }
+    if(isset($_GET["addSuc"])){
+         $smtWasAdd = true;
+         $addSuc = $_GET["addSuc"];
     }
 }
 
@@ -59,8 +67,15 @@ foreach ($exemplaires as $ligne){
     <div class="titreMenu">Nombre d'exemplaire(s): <?php echo($oeuvrInfo["nbr"]) ?> ,  Restant(s): <?php echo $nbrOeuvr ?> </div>
 
     <br>
-
     <a href="Exemplaire_add.php?idOeuvre=<?php echo($numOeuvre) ?>">Ajouter un exemplaire</a>
+    <?php if($smtWasAdd): ?>
+            <?php if($addSuc == 1): ?>
+                    <div class="alert" style="color: green">Ajout réussit !</div>
+            <?php else: ?>
+                    <div class="erreur" style="color:red;">Erreur lors de l'ajout!</div>
+            <?php endif; ?>
+            <div class="alert" style="color:green"></div>
+    <?php endif; ?>
     <table border="2">
         <caption>Liste des exemplaires</caption>
         <thead>
