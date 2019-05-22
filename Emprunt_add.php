@@ -5,15 +5,15 @@ include ("connexion_bdd.php");
 $commande = "SELECT * FROM ADHERENT ;";
 $adherent = $bdd->query($commande)->fetchAll();
 
-$commande2 = "SELECT OEUVRE.noOeuvre, OEUVRE.titre
-              , COUNT(EXEMPLAIRE.noExemplaire) AS gounter
+
+
+$commande2 = "SELECT OEUVRE.noOeuvre, COUNT(EXEMPLAIRE.noExemplaire) AS compteur
               FROM OEUVRE
-              LEFT JOIN EXEMPLAIRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre
+              RIGHT JOIN EXEMPLAIRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre
               LEFT JOIN EMPRUNT ON EMPRUNT.noExemplaire = EXEMPLAIRE.noExemplaire
+              WHERE EMPRUNT.noExemplaire IS NULL
               GROUP BY OEUVRE.noOeuvre
               ORDER BY OEUVRE.noOeuvre;";
-
-$commandePris =
 
 
 
@@ -63,7 +63,7 @@ if (isset($_GET['adherent'])){
               <?php foreach ($oeuvre as $ligne): ?>
                   <option value="<?php echo($ligne["noOeuvre"]);?>">
                       <?php echo $ligne["titre"]."-".$ligne["noOeuvre"];?>
-                  </option>                
+                  </option>
               <?php endforeach; ?>
           </select>
         <input type="submit" value="Emprunter" >
