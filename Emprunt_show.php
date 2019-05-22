@@ -2,14 +2,25 @@
 include ("connexion_bdd.php");
 include ("fonctionsUtiles.php");
 
+
+$add ="";
+if(isset($_POST['supr'])){//to run PHP script on submit
+  $spr = $_POST['supr'];
+  if(!empty($spr)){
+    foreach($spr as $sele){
+        $commande9 = "DELETE FROM EMPRUNT WHERE noExemplaire ='{$sele}'";
+        $empr = $bdd->exec($commande9);
+    }
+  }
+}
+
 $commandeBilan = "SELECT ADHERENT.nomAdherent, OEUVRE.titre, EMPRUNT.dateEmprunt, EXEMPLAIRE.noExemplaire
-                FROM EMPRUNT
-                INNER JOIN ADHERENT ON ADHERENT.idAdherent = EMPRUNT.idAdherent
-                INNER JOIN EXEMPLAIRE ON EMPRUNT.noExemplaire = EXEMPLAIRE.noExemplaire
-                INNER JOIN OEUVRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre;";
+FROM EMPRUNT
+INNER JOIN ADHERENT ON ADHERENT.idAdherent = EMPRUNT.idAdherent
+INNER JOIN EXEMPLAIRE ON EMPRUNT.noExemplaire = EXEMPLAIRE.noExemplaire
+INNER JOIN OEUVRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre;";
 
 $empr = $bdd->query($commandeBilan)->fetchAll();
-
 
 ?>
 
@@ -17,17 +28,6 @@ $empr = $bdd->query($commandeBilan)->fetchAll();
 <?php include ("v_nav.php");  ?>
 
 <div class="row">
-  <?php
-  $add ="";
-  if(isset($_POST['supr'])){//to run PHP script on submit
-    if(!empty($_POST['supr'])){
-      foreach($_POST['supr'] as $sele){
-          $commande9 = "DELETE FROM EMPRUNT WHERE noExemplaire ='{$sele}'";
-          $empr = $bdd->exec($commande9);
-      }
-    }
-  }
-   ?>
   <form action="#" method="post">
     <input type="submit" name="validerDeleteAll" id="valider" value="supprimer">
     tout sélectionner ? <input type="checkbox" onclick="toggle(this);" /><br />
