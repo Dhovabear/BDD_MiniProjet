@@ -12,5 +12,11 @@ if(isset($_POST)  )  // si il existe certaines variables dans le tableau associa
 <?php include ("v_nav.php");  ?>
 
 <!-- affichage(vue) relatif à la page -->
+<div class="row">
+    <table border="2">
+
+    </table>
+
+</div>
 
 <?php include ("v_foot.php");  ?>
