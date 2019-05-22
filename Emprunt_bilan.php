@@ -1,16 +1,21 @@
 <?php
-include("connexion_bdd.php");
-// traitement
-if(isset($_POST)  )  // si il existe certaines variables dans le tableau associatif $_POST
-{                    // le formulaire vient d'être soumis
+include ("connexion_bdd.php");
+$adPost = 3;
+$commandeBilan = "SELECT ADHERENT.nomAdherent, OEUVRE.titre, EMPRUNT.dateEmprunt
+                , COUNT(EXEMPLAIRE.noExemplaire) as nbrEx
+                FROM EXEMPLAIRE
+                INNER JOIN OEUVRE ON ADHERENT.idAdherent = EMPRUNT.idAdherent
+                INNER JOIN EXEMPLAIRE ON EMPRUNT.noExemplaire = EXEMPLAIRE.noExemplaire
+                INNER JOIN OEUVRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre;";
+  // $commandeBilan = $commandeBilan."WHERE ADHERENT.idAdherent =  GROUP BY OEUVRE.noOeuvre ;";
+  // ".$adPost."
 
-}
-
-// affichage de la vue
+$empr = $bdd->query($commandeBilan)->fetchAll();
 ?>
-<?php include("v_head.php");  ?>
-<?php include ("v_nav.php");  ?>
-
-<!-- affichage(vue) relatif à la page -->
-
-<?php include ("v_foot.php");  ?>
+<table border="1">
+  <th>titre</th><th>date Emprunt</th><th>Exemplaire</th>
+  <?php foreach($empr as $row): ?>
+      <?php
+          echo "<tr><td>".$row['titre']."</td><td>".$row['dateEmprunt']."</td><td>".$row['nbrEx']."</td>" ?>
+  <?php endforeach;?>
+</table>

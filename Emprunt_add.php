@@ -1,23 +1,33 @@
 <?php
 include ("connexion_bdd.php");
 
+
 $commande = "SELECT * FROM ADHERENT ;";
 $adherent = $bdd->query($commande)->fetchAll();
 
 $commande2 = "SELECT OEUVRE.noOeuvre, OEUVRE.titre
-              , COUNT(EXEMPLAIRE.noOeuvre) AS gounter
+              , COUNT(EXEMPLAIRE.noExemplaire) AS gounter
               FROM OEUVRE
-              INNER JOIN EXEMPLAIRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre
+              LEFT JOIN EXEMPLAIRE ON OEUVRE.noOeuvre = EXEMPLAIRE.noOeuvre
+              LEFT JOIN EMPRUNT ON EMPRUNT.noExemplaire = EXEMPLAIRE.noExemplaire
               GROUP BY OEUVRE.noOeuvre
-              ORDER BY OEUVRE.noOeuvre";
+              ORDER BY OEUVRE.noOeuvre;";
+
+$commandePris =
+
+
+
 $oeuvre = $bdd->query($commande2)->fetchAll();
 
-$visible2 = "hidden";
+
+// $commande3 = "INSERT INTO EMPRUNT VALUES";
+
+$visible2 = "none";
 $adPost = 0;
 
 if (isset($_GET['adherent'])){
   $adPost = $_GET['adherent'];
-  $visible2 = "visible";
+  $visible2 = "inline";
   $commande = "SELECT * FROM ADHERENT WHERE idAdherent =".$adPost." ;";
   $adherent = $bdd->query($commande)->fetch();
 }
@@ -44,22 +54,23 @@ if (isset($_GET['adherent'])){
           <input type="submit" value="Valider">
         <?php else : ?>
           <?php echo "Adhérent selectionné : ".$adherent["nomAdherent"]; ?>
+          <input type="hidden" name="adherent" value="<?php echo $adPost;?>">
         <?php endif; ?>
       </fieldset>
-        <div style="visibility: <?php echo $visible2;?>">
-          <select name="rendu">
+        <div style="display: <?php echo $visible2;?>">
+          <select name="emprunt">
               <option value="0">--Veuillez selectionnez une oeuvre--</option>
               <?php foreach ($oeuvre as $ligne): ?>
                   <option value="<?php echo($ligne["noOeuvre"]);?>">
                       <?php echo $ligne["titre"]."-".$ligne["noOeuvre"];?>
-                  </option>
+                  </option>                
               <?php endforeach; ?>
           </select>
-        <input type="submit" value="Valider">
+        <input type="submit" value="Emprunter" >
       </div>
     </fieldset>
   </form>
-  <!-- <a href="Emprunt_show.php">Retour</a> -->
+  <a href="Emprunt_show.php">Retour</a>
 </div>
 
 <?php include ("v_foot.php");  ?>
