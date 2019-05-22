@@ -73,6 +73,7 @@ if(isset($_GET["idOeuvre"])){
 <!-- affichage(vue) relatif à la page -->
 <div class="row">
 
+    <a href="<?php echo "Exemplaire_show.php?noOeuvre=".$oeuvre['noOeuvre'] ?>">Retour</a>
     <form action="Exemplaire_add.php" method="post">
         <caption>
             <fieldset>
