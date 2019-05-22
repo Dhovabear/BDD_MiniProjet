@@ -87,7 +87,7 @@ foreach ($exemplaires as $ligne){
     <?php endif; ?>
     <?php if($smtWasDel): ?>
         <?php if($delSuc == 1): ?>
-            <div class="alert" style="color: green">Suppression réussie !</div>x
+            <div class="alert" style="color: green">Suppression réussie !</div>
         <?php else: ?>
             <div class="erreur" style="color:red;">Erreur lors de la suppression!</div>
         <?php endif; ?>
