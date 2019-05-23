@@ -125,7 +125,7 @@ if (isset($_POST['emprunt'])){
     </table>
 
 <?php endif ?>
-  <a href="Emprunt_show.php">Retour</a>
+  <!-- <a href="Emprunt_r.php">Retour</a> -->
 </div>
 
 <?php include ("v_foot.php");  ?>
