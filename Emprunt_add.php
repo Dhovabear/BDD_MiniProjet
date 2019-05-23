@@ -27,6 +27,7 @@ $oeuvre = $bdd->query($commandeExemplaireDispo)->fetchAll();
 
 $visible2 = "none";
 $adPost = 0;
+$testDate= true;
 
 if (isset($_POST['reset'])){
   header("Location: Emprunt_add.php?");
@@ -58,9 +59,12 @@ if (isset($_POST['emprunt'])){
       $commandeFinal = "INSERT INTO EMPRUNT VALUES ('".$adPost."','".$unExemplaire["noExemplaire"]."','".$dateEmp."',NULL);";
       $fin = $bdd->exec($commandeFinal);
       header("Location: Emprunt_add.php?confirm=".$adPost);
+    }else {
+        $testDate = false;
+      }
     }
   }
-}
+
 
 
 ?>
@@ -98,6 +102,7 @@ if (isset($_POST['emprunt'])){
               <?php endforeach; ?>
           </select>
         <input type="text" name="dateEmprunt" value="<?php echo date("d/m/Y");?>">
+        <div class="erreur"><?php if($testDate == false){echo $dateEmp;}; ?></div>
         <input type="submit" value="Emprunter" >
       </div>
     </fieldset>
