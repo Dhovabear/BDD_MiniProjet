@@ -148,7 +148,7 @@ if(isset($_GET)){
                     <div class="erreur" style="color: red">Veuillez entrer un prix valide !</div>
                 <?php endif; ?>
                 <br>
-                <input type="submit" value="Ajouter">
+                <input type="submit" value="Modifier">
             </fieldset>
         </caption>
     </form>
