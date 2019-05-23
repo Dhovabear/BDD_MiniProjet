@@ -122,6 +122,7 @@ if(isset($_GET)){
 
 <!-- affichage(vue) relatif à la page -->
 <div class="row">
+    <a href="Exemplaire_show.php?noOeuvre=<?php echo $oeuvre["noOeuvre"]?>">retour</a>
     <form action="Exemplaire_edit.php" method="post">
         <caption>
             <fieldset>
